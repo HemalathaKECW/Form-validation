@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Form Validation</title>
+<script>
+function fun()
+{	
+	var fna=document.form1.txt1.value;
+	var sna=document.form1.txt2.value;
+	var email=document.form1.mail.value;
+	var pwd=document.form1.pwd.value;
+	var num=document.form1.zip.value;
+	var country1=document.form1.country;
+	var mgen1=document.getElementById("male");
+	var fgen1=document.getElementById("female");
+	var address=document.form1.add.value;				
+	if(firstnamevalid(fna)){}
+	if(secondnamevalid(sna)){}
+	if(emailvalid(email)){}
+	if(passwordvalid(pwd)){}
+	if(pinvalid(num)){}
+	if(countryvalid(country1)){}
+	if(validgender(mgen1,fgen1)){}
+	if(validadd(address)){}
+	return false;
+	
+}
+function firstnamevalid(fstnme)
+{
+	//var fna=document.getElementById("txt1").value;
+	var letters = /^[A-Za-z]+$/;
+   	if(fstnme == "")
+	{
+		document.getElementById("lb1").style.display="inline";
+		document.getElementById("lb2").style.display="none"
+		return false;
+	}
+	
+	else if(fstnme.match(letters))
+	{
+		document.getElementById("lb1").style.display="none";
+		document.getElementById("lb2").style.display="none";
+		return true;
+	}
+	else
+	{
+		document.getElementById("lb2").style.display="inline";
+		document.getElementById("lb1").style.display="none";
+		return false;
+	}
+}
+function secondnamevalid(scndnme)
+{
+	 var letters1 = /^[A-Za-z]+$/;
+   	if(scndnme == "")
+	{
+		document.getElementById("lb3").style.display="inline";
+		document.getElementById("lb4").style.display="none";
+		return false;
+	}
+	else if(scndnme.match(letters1))
+	{
+		document.getElementById("lb3").style.display="none";
+		document.getElementById("lb4").style.display="none"
+		return true;
+	}
+	else
+	{
+		document.getElementById("lb4").style.display="inline";
+		document.getElementById("lb3").style.display="none";
+		return false;
+	}
+}
+function emailvalid(email)
+{
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if(email=="")
+	{
+		document.getElementById("lb5").style.display="inline";
+		document.getElementById("lb6").style.display="none";
+
+		return false;
+		
+	}
+	else if(!filter.test(email))
+	{
+		document.getElementById("lb6").style.display="inline";
+		document.getElementById("lb5").style.display="none";
+		return false;
+	}
+	else
+	{
+		document.getElementById("lb6").style.display="none";
+		document.getElementById("lb5").style.display="none";
+		return true;
+	}
+}
+function passwordvalid(pwd)
+{
+	var letter=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/;
+	if(pwd=="")
+	{
+		document.getElementById("lb7").style.display="inline";
+		document.getElementById("lb8").style.display="none";
+		return false;
+	}
+	else if(pwd.length<6||pwd.length>12)
+	{
+		document.getElementById("lb8").style.display="inline";
+		document.getElementById("lb7").style.display="none";
+		
+		return false;
+	}
+	else if(letter.test(pwd))
+	{
+		document.getElementById("lb9").style.display="none";
+		document.getElementById("lb8").style.display="none";
+		document.getElementById("lb7").style.display="none";
+		return true;
+	}
+	
+	else
+	{
+		
+		document.getElementById("lb9").style.display="inline";
+		document.getElementById("lb8").style.display="none";
+		document.getElementById("lb7").style.display="none";
+		
+		return false;
+	}
+}
+
+function pinvalid(num)
+{
+	var letter=/^[0-9]{6,6}$/;
+	if(num == "")
+	{
+		document.getElementById("lb13").style.display="inline";
+		return false;
+	}
+	else if(letter.test(num))
+	{
+		document.getElementById("lb14").style.display="none";
+		document.getElementById("lb13").style.display="none";
+		return true;
+	}
+	else
+	{
+		document.getElementById("lb14").style.display="inline";
+		document.getElementById("lb13").style.display="none";
+		return false;
+	}
+}
+function countryvalid(country1)
+{
+	if(country1.selectedIndex == 0)
+		{
+			document.getElementById("lb12").style.display="inline";
+			return false;
+		}
+		else
+		{
+			document.getElementById("lb12").style.display="none";
+			return false;
+		}
+}
+function validgender(mgen1,fgen1)
+{
+	
+	if(mgen1.checked==true||fgen1.checked==true)
+	{
+		
+		document.getElementById("lb10").style.display="none";
+		return false;
+	}
+	
+		
+		else
+	{
+		document.getElementById("lb10").style.display="inline";
+		return false;	
+	}
+}
+function validadd(address)
+{
+	
+	var letter=/^[0-9a-zA-Z]+$/;
+	if(address=="")
+	{
+		document.getElementById("lb15").style.display="inline";
+		document.getElementById("lb16").style.display="none";
+		return false;
+	}
+	else if(address.match(letter))
+	{
+		
+		return false;
+	}
+	else
+	{
+		document.getElementById("lb16").style.display="inline";
+		document.getElementById("lb15").style.display="none";
+		return false;
+	}
+}
+</script>
+<style>
+#lb1,#lb2,#lb3,#lb4,#lb5,#lb6,#lb7,#lb8,#lb9,#lb10,#lb11,#lb12,#lb13,#lb14,#lb15,#lb16{display:none;color:red;}
+</style>
+</head>
+
+<body>
+<form onsubmit="return fun()" name="form1">
+<label>First Name</label>
+<input type="text" id="txt1" title="only alphabets are allowed upto 15 characters and special characters are not allowed">
+<label id="lb1">Please enter valid name</label>
+<label id="lb2">Only Alphabets are accepted here</label><br><br>
+<label>Second Name</label>
+<input type="text" id="txt2" title="only alphabets are allowed">
+<label id="lb3">Please enter valid name</label>
+<label id="lb4">Only Alphabets are accepted here</label>
+<br><br>
+<label>Email Id</label>
+<input type="text" id="mail" title="enter your valid Gmail address">
+<label id="lb5">Please enter the mail id</label>
+<label id="lb6">Please enter the valid email id</label><br><br>
+<label>Password</label>
+<input type="password" id="pwd" title="pwd">
+<label id="lb7">Please enter password</label>
+<label id="lb8">The password length should be in between 6 to 12 characters</label>
+<label id="lb9">Atleast one lowercase letter,one uppercase letter,one numeric letter,one special character must 
+</label><br><br>
+<label>Pincode</label>
+<input type="text" id="zip">
+<label id="lb13">Please Enter the pincode</label>
+<label id="lb14">Pincode is in numbers only of range 1 to 6</label><br><br>
+<b><label id="country">Country</label></b>
+<select name="country" id="country">
+<option selected="" value="default">Select any country</option>
+<option value="India">India</option>
+<option value="U.S.A">U.S.A</option>
+<option value="U.K">U.K</option>
+<option value="Austraila">Austraila</option>
+</select>
+<label id="lb12">Please select your country</label><br><br>
+<b><label>Gender</label></b><br>
+<label>Male</label>
+<input type="radio" id="male" name="male">
+<label>Female</label>
+<input type="radio" id="female" name="male">
+<label id="lb10">Please Select gender</label><br><br>
+<b><label>Address</label></b>
+<textarea rows="5" cols="20" id="add"></textarea>
+<label id="lb15">Please Enter the valid address</label>
+<label id="lb16">Address donot contains any special symbols</label><br><br>
+<input type="submit" value="click Here">
+</body>
+</html>
